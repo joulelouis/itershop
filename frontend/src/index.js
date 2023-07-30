@@ -19,6 +19,8 @@ import './assets/styles/index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import HomeScreen from './screens/HomeScreen';
+import ProductScreen from './screens/ProductScreen';
+
 /*
  - 'createRoutesFromElements' is a helper that creates route objects from '<Route>' elemenets.
  - it is useful if  you prefer  to create your routes as JSX instead of objects
@@ -46,6 +48,7 @@ const router = createBrowserRouter(
     // in this code, the first '<Route>' component represents the root path of the application and renders the 'App' (root) component
     <Route path="/" element={<App />}>
       <Route index={true} path="/" element={<HomeScreen />} />
+      <Route path="/product/:id" element={<ProductScreen />} />
     </Route>
   )
 )
