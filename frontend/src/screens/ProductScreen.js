@@ -1,10 +1,12 @@
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Row, Col, Image, ListGroup, Card, Button, ListGroupItem } from 'react-bootstrap';
 import Rating from '../components/Rating';
-import products from '../products';
+import axios from 'axios';
 
 const ProductScreen = () => {
+	const [product, setProduct] = useState({});
 
 	// get the ID from the URL
 	// 'useParams()' is a custom hook provided by the 'react-router-dom' library. It allows accessing the parameters defined in the URL of the current route.
@@ -13,8 +15,16 @@ const ProductScreen = () => {
 	const { id: productId } = useParams();
 
 	// fetch the data of product in the array
-	const product = products.find((p) => p._id === productId);
-	console.log(product);
+	// const product = products.find((p) => p._id === productId);
+	
+	useEffect(() => {
+		const fetchProduct = async () => {
+			const { data } = await axios.get(`/api/products/${productId}`);
+			setProduct(data);
+		}
+
+		fetchProduct();
+	}, [productId]);
 
 	return (
 		<>
